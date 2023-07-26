@@ -18,7 +18,7 @@ app.post("/", function(req, res){
         var tablero = requi.event.boardId;
         if(tablero == 4855583231){
             // console.log("este es el de la apertura de cajas");
-            console.log(requito);
+            // console.log(requito);
             var sucursal = requi.event.columnValues.selecci_n__nica.label.text;
             switch(sucursal){
                 case "SAN PABLO 1":
