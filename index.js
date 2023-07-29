@@ -1,8 +1,6 @@
 const express = require("express")
 const http  = require("http");
 const bodyParser = require("body-parser");
-const { emitWarning } = require("process");
-
 
 const app = express();
 const server = http.createServer(app);
@@ -14,6 +12,7 @@ app.post("/", function(req, res){
     if(requi.hasOwnProperty('challenge')){
         console.log(requi);
         res.status(200).send(requi);
+        res.end();
     }else{
         var tablero = requi.event.boardId;
         if(tablero == 4855583231){
@@ -22,7 +21,7 @@ app.post("/", function(req, res){
             var sucursal = requi.event.columnValues.selecci_n__nica.label.text;
             switch(sucursal){
                 case "SAN PABLO 1":
-                    url= "http://192.168.100.253:1619/storetools/public/api/Cashier/opencashier";
+                    url= "http://192.168.100.250:1619/storetools/public/api/Cashier/opencashier";
                 break;
                 case "SAN PABLO 2":
                     url = "http://192.168.60.253:1619/storetools/public/api/Cashier/opencashier";
@@ -47,6 +46,9 @@ app.post("/", function(req, res){
                 break;
                 case "RAMON CORONA 2":
                     url = "http://192.168.10.212:1619/storetools/public/api/Cashier/opencashier";
+                break;
+                case "BOLIVIA":
+                    url = "http://192.168.70.253:1619/storetools/public/api/Cashier/opencashier";
                 break;
                 case "BRASIL 1":
                     url = "http://192.168.80.252:1619/storetools/public/api/Cashier/opencashier";
@@ -153,8 +155,7 @@ app.post("/", function(req, res){
         }else{
             console.log("el tablero que recibi "+ tablero)
         }
-
-        
+        res.end();
     }
 
 })
