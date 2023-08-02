@@ -93,7 +93,7 @@ app.post("/", function(req, res){
                         "firma": firmag,
                         "cajero":cajero
                     };
-                    invoiceurl(url,requerimento);
+                    invoiceurl(url,requerimento,sucursal);
                 }else if(movimiento == "RETIRADA MAL"){
                     var retirada = requi.event.columnValues.n_mero.value;//codigo de retirada
                     var observacion  = requi.event.columnValues.texto_largo.text;//observacion de el formulario
@@ -114,7 +114,7 @@ app.post("/", function(req, res){
                         "tipo_mov":movimiento,
                         "cajero":cajero
                     }
-                    invoiceurl(url,requerimento);
+                    invoiceurl(url,requerimento,sucursal);
                 }else if(movimiento == "DESCUADRE"){
                     var requerimento = {
                         "caja":caja,
@@ -123,7 +123,7 @@ app.post("/", function(req, res){
                         "tipo_mov":movimiento,
                         "cajero":cajero
                     }
-                    invoiceurl(url,requerimento);
+                    invoiceurl(url,requerimento,sucursal);
                 }else{
         
                 }
@@ -132,7 +132,7 @@ app.post("/", function(req, res){
                 var requerimento = {
                     "mensaje":"no hay firmas"
                 }
-                invoiceurl(url,requerimento);
+                invoiceurl(url,requerimento,sucursal);
                 
             }
         
@@ -160,7 +160,7 @@ app.post("/", function(req, res){
 
 })
 
-function invoiceurl(url,data){
+function invoiceurl(url,data,sucursal){
     var requerimentoJSON = JSON.stringify(data);
     fetch(url, {
         method: 'POST',
@@ -171,7 +171,7 @@ function invoiceurl(url,data){
     })
     .then(response => response.text())
     .then(data => {
-        console.log("respuesta " + data);
+        console.log("respuesta " + data + sucursal);
     })
     .catch(error => {
         console.log(error);
