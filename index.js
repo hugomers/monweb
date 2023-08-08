@@ -158,14 +158,16 @@ app.post("/", function(req, res){
             console.log("este es el de actas administrativas bro");
             var url = "http://192.168.12.83:1619/Assist/public/api/resources/actadmin"
             var columns = requi.event.columnValues;
-            var sucursal = columns.selecci_n__nica.label.text;
+            var sucursal = columns.sucursal5.label.text;
             var miembro = columns.selecci_n_m_ltiple.chosenValues[0].name;
-            var puesto = columns.selecci_n__nica6.label.text;
+            var puesto = columns.puesto6.label.text;
             var motivo = columns.texto_largo.text;
             var consmie = columns.texto_largo1 == undefined ? null : columns.texto_largo1.text;
             var contes = columns.texto_largo4 == undefined ? null : columns.texto_largo4.text;
             var conclusion = columns.texto_largo2.text;
-            var fecha = requi.event.triggerTime;
+            // var fecha = requi.event.triggerTime;
+            var fecha = columns.fecha.date;
+            var hora = columns.texto_corto2.value;
             var requerimento = {
                 "sucursal":sucursal,
                 "miembro":miembro,
@@ -174,8 +176,10 @@ app.post("/", function(req, res){
                 "consmie":consmie,
                 "contes":contes,
                 "fecha":fecha,
-                "conclusion":conclusion
+                "conclusion":conclusion,
+                "hora":hora
             }
+            // console.log(requerimento);
             invoiceurl(url,requerimento,sucursal);
         }else{
             console.log("el tablero que recibi "+ tablero)
