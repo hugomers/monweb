@@ -152,6 +152,31 @@ app.post("/", function(req, res){
             console.log("este es el de encuestaclimalaboral");
         }else if(tablero == 1520861792){
             console.log("este es el de la lista personal camios")
+        }else if(tablero == 4933901663){
+            // console.log(requito);
+
+            console.log("este es el de actas administrativas bro");
+            var url = "http://192.168.12.83:1619/Assist/public/api/resources/actadmin"
+            var columns = requi.event.columnValues;
+            var sucursal = columns.selecci_n__nica.label.text;
+            var miembro = columns.selecci_n_m_ltiple.chosenValues[0].name;
+            var puesto = columns.selecci_n__nica6.label.text;
+            var motivo = columns.texto_largo.text;
+            var consmie = columns.texto_largo1 == undefined ? null : columns.texto_largo1.text;
+            var contes = columns.texto_largo4 == undefined ? null : columns.texto_largo4.text;
+            var conclusion = columns.texto_largo2.text;
+            var fecha = requi.event.triggerTime;
+            var requerimento = {
+                "sucursal":sucursal,
+                "miembro":miembro,
+                "puesto":puesto,
+                "motivo":motivo,
+                "consmie":consmie,
+                "contes":contes,
+                "fecha":fecha,
+                "conclusion":conclusion
+            }
+            invoiceurl(url,requerimento,sucursal);
         }else{
             console.log("el tablero que recibi "+ tablero)
         }
@@ -171,7 +196,7 @@ function invoiceurl(url,data,sucursal){
     })
     .then(response => response.text())
     .then(data => {
-        console.log("respuesta " + data + sucursal);
+        console.log("respuesta " + data + " " + sucursal);
     })
     .catch(error => {
         console.log(error);
