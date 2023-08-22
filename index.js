@@ -162,7 +162,7 @@ app.post("/", function(req, res){
         }else if(tablero == 4738541896 ){//tablero check list inicio de operaciones
             var idmon = requi.event.pulseId;
             var sucursal = null;
-            var url = "http://192.168.12.173:1619/Assist/public/api/Monday/cheklistiop";
+            var url = "http://192.168.10.61:1619/Assist/public/api/Monday/cheklistiop";
             var requerimento = {
                 "id":idmon
             };
@@ -173,7 +173,7 @@ app.post("/", function(req, res){
         }else if(tablero == 4738652916 ){//check list final de operaciones
             var idmon = requi.event.pulseId;
             var sucursal = null;
-            var url = "http://192.168.12.173:1619/Assist/public/api/Monday/cheklistfinop";
+            var url = "http://192.168.10.61:1619/Assist/public/api/Monday/cheklistfinop";
             var requerimento = {
                 "id":idmon
             };
@@ -191,7 +191,7 @@ app.post("/", function(req, res){
         }else if(tablero == 4933901663){// actas administrativas
             // console.log(requito);
             console.log("este es el de actas administrativas bro");
-            var url = "http://192.168.12.173:1619/Assist/public/api/resources/actadmin"
+            var url = "http://192.168.10.61:1619/Assist/public/api/resources/actadmin"
             var columns = requi.event.columnValues;
             var sucursal = columns.sucursal5.label.text;
             var miembro = columns.selecci_n_m_ltiple.chosenValues[0].name;
