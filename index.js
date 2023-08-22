@@ -15,7 +15,7 @@ app.post("/", function(req, res){
         res.end();
     }else{
         var tablero = requi.event.boardId;
-        if(tablero == 4855583231){
+        if(tablero == 4855583231){//tablero de las aperturas de caja
             // console.log("este es el de la apertura de cajas");
             // console.log(requito);
             var sucursal = requi.event.columnValues.selecci_n__nica.label.text;
@@ -63,7 +63,7 @@ app.post("/", function(req, res){
                     url = "http://192.168.20.253:1619/storetools/public/api/Cashier/opencashier";
                 break;
                 case "APARTADO 2":
-                    url = "http://192.168.20.200:1619/storetools/public/api/Cashier/opencashier";
+                    url = "http://192.168.20.201:1619/storetools/public/api/Cashier/opencashier";
                 break;
                 case "PUEBLA":
                     url = "http://192.168.90.253:1619/storetools/public/api/Cashier/opencashier";
@@ -136,27 +136,62 @@ app.post("/", function(req, res){
                 
             }
         
-        }else if (tablero == 2275639723){
-            console.log("este es el de las cifras control");
-        }else if(tablero == 4403681072 ){
+        }else if (tablero == 2275639723){//tablero de cifras control
+            var columns = requi.event.columnValues;
+            var envio = columns.texto.value;
+            var quien = columns.men__desplegable.chosenValues[0].name;
+            var msg = "Recibiste una cifra de " + quien + " con la descripcion " + envio;
+            var request = require("request");
+            var options = {
+            method: 'POST',
+            url: 'https://api.ultramsg.com/instance9800/messages/chat',
+            headers: {'content-type': ' application/x-www-form-urlencoded'},
+            form: {
+                "token": "7lxqd2rwots9u4lv",
+                "to": "+525573461022",
+                "body": msg
+            }
+            };
+            request(options, function (error, response, body) {
+            if (error) throw new Error(error);
+            console.log(body);
+            });
+            // console.log("este es el de las cifras control");
+        }else if(tablero == 4403681072 ){// tablero justificaciones
             console.log("este es el de justificaciones");
-        }else if(tablero == 4738541896 ){
-            console.log("este es el de checklist inicio de operaciones");
-        }else if(tablero == 4738652916 ){
-            console.log("este es el de checklist final de operaciones");
-        }else if(tablero == 4760726454 ){
-            console.log("este es el de checklist administrativos");
-        }else if(tablero == 4775379200 ){
-            console.log("este es el de auditoria");
-        }else if(tablero == 4813574060){
-            console.log("este es el de encuestaclimalaboral");
-        }else if(tablero == 1520861792){
-            console.log("este es el de la lista personal camios")
-        }else if(tablero == 4933901663){
-            // console.log(requito);
+        }else if(tablero == 4738541896 ){//tablero check list inicio de operaciones
+            var idmon = requi.event.pulseId;
+            var sucursal = null;
+            var url = "http://192.168.12.173:1619/Assist/public/api/Monday/cheklistiop";
+            var requerimento = {
+                "id":idmon
+            };
+            // console.log(requerimento);
+            invoiceurl(url,requerimento,sucursal)
 
+            console.log("este es el de checklist inicio de operaciones");
+        }else if(tablero == 4738652916 ){//check list final de operaciones
+            var idmon = requi.event.pulseId;
+            var sucursal = null;
+            var url = "http://192.168.12.173:1619/Assist/public/api/Monday/cheklistfinop";
+            var requerimento = {
+                "id":idmon
+            };
+            // console.log(requerimento);
+            invoiceurl(url,requerimento,sucursal)
+            console.log("este es el de checklist final de operaciones");
+        }else if(tablero == 4760726454 ){//check list administrativos
+            console.log("este es el de checklist administrativos");
+        }else if(tablero == 4775379200 ){//checke list auditoria
+            console.log("este es el de auditoria");
+        }else if(tablero == 4813574060){//encusta clima laboral
+            console.log("este es el de encuestaclimalaboral");
+        }else if(tablero == 1520861792){//lista personal cambio
+            console.log("este es el de la lista personal camios")
+        }else if(tablero == 4933901663){// actas administrativas
+            // console.log(requito);
             console.log("este es el de actas administrativas bro");
-            var url = "http://192.168.12.83:1619/Assist/public/api/resources/actadmin"
+            var url = "http://192.168.12.173:1619/Assist/public/api/resources/actadmin"
             var columns = requi.event.columnValues;
             var sucursal = columns.sucursal5.label.text;
             var miembro = columns.selecci_n_m_ltiple.chosenValues[0].name;
