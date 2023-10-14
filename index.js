@@ -325,7 +325,28 @@ app.post("/", function (req, res) {
             }
 
 
-        } else {
+        } else if (tablero == 5329441165){
+            console.log("ES EL DE LAS FACTURAS RECIBIDAS")
+            var idmod = requi.event.pulseId;
+            var columns = requi.event.columnValues;
+            var factura = columns.texto.value;
+            var requerimento = {
+                factura: factura
+            };
+            var url = 'http://192.168.10.61:1619/Assist/public/api/Products/invoiceReceived'
+            invoiceurl(url,requerimento,'CEDIS').then(res =>{
+                var respuesta = JSON.parse(res);
+                console.log(respuesta);
+                var frec = respuesta.Movimientos.FacturaEntrada;
+                
+                var recibida = "mutation {change_simple_column_value (board_id: "+tablero+", item_id: "+idmod+", column_id: \"texto4\", value: \""+frec+"\") {id}}";
+                var realizado = "mutation {change_simple_column_value (board_id: "+tablero+", item_id: "+idmod+", column_id: \"status\", value: \"Realizado\") {id}}"
+                apimon(recibida);
+                apimon(realizado);
+            })
+            
+            
+        }else {
             console.log("el tablero que recibi " + tablero)
         }
         res.end();
