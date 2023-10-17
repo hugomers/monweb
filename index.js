@@ -289,10 +289,10 @@ app.post("/", function (req, res) {
                     .then(res => res.json())
                     .then(res => {
                         dat = res.data.boards[0].items[0].column_values
-                        var origen = dat[2].text;
-                        var destino = dat[3].text;
-                        var devolucion = dat[5].text;
-                        var observacion = dat[4].text;
+                        var origen = dat[3].text;
+                        var destino = dat[4].text;
+                        var devolucion = dat[6].text;
+                        var observacion = dat[5].text;
                         var requerimento = {
                             origen: origen,
                             destino: destino,
