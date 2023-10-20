@@ -33,7 +33,7 @@ app.post("/", function (req, res) {
                     url = "http://192.168.60.249:1619/storetools/public/api/Cashier/opencashier";
                     break;
                 case "SOTANO":
-                    url = "http://192.168.110.253:1619/storetools/public/api/Cashier/opencashier";
+                    url = "http://192.168.110.251:1619/storetools/public/api/Cashier/opencashier";
                     break;
                 case "CORREO 1":
                     url = "http://192.168.30.253:1619/storetools/public/api/Cashier/opencashier";
@@ -45,7 +45,7 @@ app.post("/", function (req, res) {
                     url = "http://192.168.10.211:1619/storetools/public/api/Cashier/opencashier";
                     break;
                 case "RAMON CORONA 2":
-                    url = "http://192.168.10.212:1619/storetools/public/api/Cashier/opencashier";
+                    url = "http://192.168.10.119:1619/storetools/public/api/Cashier/opencashier";
                     break;
                 case "BOLIVIA":
                     url = "http://192.168.70.253:1619/storetools/public/api/Cashier/opencashier";
